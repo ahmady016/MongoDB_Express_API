@@ -1,0 +1,6 @@
+{
+  "db": {
+    "test": "TEST_DB_URL",
+    "google_books": "GOOGLE_BOOKS_DB_URL"
+  }
+}
