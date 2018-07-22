@@ -13,7 +13,8 @@
   "license": "MIT",
   "main": "server.js",
   "scripts": {
-    "start": "babel-watch server.js"
+    "start": "babel-watch server.js",
+    "test": "babel-watch test.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

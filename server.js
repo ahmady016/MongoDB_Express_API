@@ -9,7 +9,7 @@ import cors from 'cors'
 const PORT = process.env.PORT || config.get("port");
 const app = express();
 
-mongoose.connect(config.get("db.test"))
+mongoose.connect(config.get("db.test"), { useNewUrlParser: true })
         .then(() => dbLog('connected to test db ...'))
         .catch(err => dbLog(err.message))
 

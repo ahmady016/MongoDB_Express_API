@@ -1,6 +1,7 @@
 {
   "db": {
     "test": "TEST_DB_URL",
-    "google_books": "GOOGLE_BOOKS_DB_URL"
+    "google_books": "GOOGLE_BOOKS_DB_URL",
+    "imdb_movies": "IMDB_MOVIES_DB_URL"
   }
 }
