@@ -15,15 +15,18 @@ const buildQuery = (query) => {
             .filter(item => item[0] !== "") // remove empty item
             .map(item => [item[0], item[1].split(',')]) // split to [fieldName, values]
             .reduce( (acc, item) => { // build the query object
-              // in case of regex build a regex
-              acc[item[0]] = item[1].reduce((ac, el) => {
-                  const keyVal = el.split(':'); // split [operator, value]
-                  if(keyVal.length === 1)
-                    return new RegExp(keyVal[0], 'i');
-              }, '');
-              if(!acc[item[0]]) {
-                // other operator build an object
-                acc[item[0]] = item[1].reduce( (ac, el) => {
+              const [fieldName, values] = item;
+              if(values.length === 1) { // in case of one query value by fieldName
+                const keyVal = values[0].split(':'); // split [operator, value]
+                (keyVal.length === 1)
+                  ? acc[fieldName] = new RegExp(keyVal[0], 'i') // in case of regex build a regex
+                  : acc[fieldName] = {
+                    [keyVal[0]]: (keyVal[1].includes('|')) // in case of $in $nin
+                                    ? keyVal[1].split('|')
+                                    : keyVal[1]
+                  }
+              } else { // in case of many query values by fieldName
+                acc[fieldName] = values.reduce( (ac, el) => {
                     const keyVal = el.split(':'); // split [operator, value]
                     if(keyVal.length === 2) {
                       ac[keyVal[0]] = (keyVal[1].includes('|')) // in case of $in $nin
