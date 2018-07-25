@@ -25,7 +25,7 @@ const buildQuery = (query) => {
                                     ? keyVal[1].split('|')
                                     : keyVal[1]
                   }
-              } else { // in case of many query values by fieldName
+              } else if (values.length > 1 && !acc[fieldName]) { // in case of many query values by fieldName
                 acc[fieldName] = values.reduce( (ac, el) => {
                     const keyVal = el.split(':'); // split [operator, value]
                     if(keyVal.length === 2) {
